@@ -1,0 +1,36 @@
+.button {
+    width: 400pt;
+    
+    height: 36pt;   
+    background-color: rgba(0, 0, 0, 0.493);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  input[type=text], select {
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .message{
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 400pt;
+    height: 40pt;
+  }
+  .message_box{
+    overflow-y: scroll;
+    width: 400pt;
+    height: 450pt;
+  }

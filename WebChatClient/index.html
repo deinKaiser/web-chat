@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <input class="user_input" type="text" id="user" placeholder="Enter your name" />
+        </br>
+        <textarea class="message" type="text" id="message" placeholder="Write something..."></textarea>
+        </br>
+        <input class="button" type="button" value="PRESS to SEND" id="send" />
+        <div class="message_box" id='messages'></div>
+
+        <script type="text/javascript">
+            var socket,
+                $txt = document.getElementById('message'),
+                $user = document.getElementById('user'),
+                $messages = document.getElementById('messages');
+
+            if (typeof (WebSocket) !== 'undefined') {
+                socket = new WebSocket("ws://localhost/WebChat/WebChatHandler.ashx");
+            } else {
+                socket = new MozWebSocket("ws://localhost/WebChat/WebChatHandler.ashx");
+            }
+        
+            socket.onmessage = function (msg) {
+                var $el = document.createElement('p');
+                $el.innerHTML = msg.data;
+                $messages.prepend($el);
+            };
+
+            socket.onclose = function (event) {
+                alert('Socket lost.');
+            };
+
+            document.getElementById('send').onclick = function () {
+                let user = $user.value;
+                let text = $txt.value;
+                for (let i = 0; i < user.length + text.length; i++) {
+                    user.replace(" ", "");
+                    text.replace(" ", "");
+                }
+                if (user != "" && text != "") {
+                    socket.send($user.value + ' : ' + $txt.value);
+                    $txt.value = '';
+                }
+            };
+        </script>
+    </div>
+</body>
+
+</html>
